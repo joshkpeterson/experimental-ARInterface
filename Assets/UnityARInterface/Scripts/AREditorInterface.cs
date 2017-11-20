@@ -41,22 +41,22 @@ namespace UnityARInterface
                 //center = new Vector3(1f, 1f, 1f)
             };
 
-            m_FakePlanes[1] = new BoundedPlane()
-            {
-                id = "0x2",
-                extents = new Vector2(2f, 2f),
-                rotation = Quaternion.AngleAxis(200f, Vector3.up),
-                center = new Vector3(3f, 1f, 3f)
-            };
+            // m_FakePlanes[1] = new BoundedPlane()
+            // {
+            //     id = "0x2",
+            //     extents = new Vector2(2f, 2f),
+            //     rotation = Quaternion.AngleAxis(200f, Vector3.up),
+            //     center = new Vector3(3f, 1f, 3f)
+            // };
 
-            m_PointCloud = new Vector3[20];
-            for (int i = 0; i < 20; ++i)
-            {
-                m_PointCloud[i] = new Vector3(
-                    UnityEngine.Random.Range(-2f, 2f),
-                    UnityEngine.Random.Range(-.5f, .5f),
-                    UnityEngine.Random.Range(-2f, 2f));
-            }
+            // m_PointCloud = new Vector3[20];
+            // for (int i = 0; i < 20; ++i)
+            // {
+            //     m_PointCloud[i] = new Vector3(
+            //         UnityEngine.Random.Range(-2f, 2f),
+            //         UnityEngine.Random.Range(-.5f, .5f),
+            //         UnityEngine.Random.Range(-2f, 2f));
+            // }
 
             return true;
         }
@@ -88,7 +88,7 @@ namespace UnityARInterface
                 pointCloud.points = new List<Vector3>();
 
             pointCloud.points.Clear();
-            pointCloud.points.AddRange(m_PointCloud);
+            // pointCloud.points.AddRange(m_PointCloud);
             return true;
         }
 
@@ -107,7 +107,7 @@ namespace UnityARInterface
 
         public override void UpdateCamera(Camera camera)
         {
-            float speed = camera.transform.parent.localScale.x / 10f;
+            float speed = camera.transform.parent.localScale.x / 1f;
             float turnSpeed = 10f;
             var forward = m_CameraPose.rotation * Vector3.forward;
             var right = m_CameraPose.rotation * Vector3.right;
@@ -164,19 +164,20 @@ namespace UnityARInterface
                     {
                         OnPlaneAdded(m_FakePlanes[0]);
                         m_LastTime = Time.time;
-                        m_State = State.WaitingToAddPlane2;
-                    }
-                    break;
-
-                case State.WaitingToAddPlane2:
-
-                    if (Time.time - m_LastTime > 1f)
-                    {
-                        OnPlaneAdded(m_FakePlanes[1]);
-                        m_LastTime = Time.time;
+                        // m_State = State.WaitingToAddPlane2;
                         m_State = State.Finished;
                     }
                     break;
+
+                // case State.WaitingToAddPlane2:
+
+                //     if (Time.time - m_LastTime > 1f)
+                //     {
+                //         OnPlaneAdded(m_FakePlanes[1]);
+                //         m_LastTime = Time.time;
+                //         m_State = State.Finished;
+                //     }
+                //     break;
             }
         }
     }
