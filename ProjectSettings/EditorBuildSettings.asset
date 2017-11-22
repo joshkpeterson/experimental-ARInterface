@@ -32,3 +32,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/TanksNetworkingAR/Scenes/CompleteMainScene.unity
     guid: 53dbee9b5f0f43642ab7e99460ca86d2
+  - enabled: 1
+    path: Assets/UnityARInterface/Examples/SimpleARScene/SimpleARScene.unity
+    guid: 167d17fd2d45b2349bdea3b551871131
