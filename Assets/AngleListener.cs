@@ -37,17 +37,32 @@ public class AngleListener : MonoBehaviour {
         var vignette = m_Profile.vignette.settings;
         // vignette.smoothness = Mathf.Abs(Mathf.Sin(Time.realtimeSinceStartup) * 0.99f) + 0.01f;
 
-        if (fXRot < 340 && fXRot > 270) {
+        var color = m_Profile.colorGrading.settings;
+
+        if (fXRot < 360 && fXRot > 270) {
             // vignette.smoothness = 0.99f;
-            vignette.smoothness = mapRange(340f, 270f, 0f, 1f, fXRot);
+            vignette.smoothness = mapRange(360f, 270f, 0f, 1f, fXRot);
+            color.channelMixer.red.x = mapRange(360f, 270f, 1f, 2f, fXRot);
+            color.channelMixer.red.y = mapRange(360f, 270f, 0f, 2f, fXRot);
+            // Debug.Log(color.channelMixer.red.x);
+            // Debug.Log(color.channelMixer.red.x);
+
+
+
 
         } else {
             vignette.smoothness = 0f;
+            // Debug.Log(color.channelMixer.red);
+            color.channelMixer.red.x = 1f;
+            color.channelMixer.red.y = 0f;
+
         }
 
-        Debug.Log(vignette.smoothness);
+        // Debug.Log(vignette.smoothness);
 
         m_Profile.vignette.settings = vignette;
+        m_Profile.colorGrading.settings = color;
+
 
 	}
 }
