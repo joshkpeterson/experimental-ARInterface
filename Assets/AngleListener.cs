@@ -10,6 +10,11 @@ public class AngleListener : MonoBehaviour {
 
     PostProcessingProfile m_Profile;
 
+    float mapRange(float a1,float a2,float b1,float b2,float s)
+    {
+        return b1 + (s-a1)*(b2-b1)/(a2-a1);
+    }
+
 	void Start () {
 		var behaviour = GetComponent<PostProcessingBehaviour>();
 
@@ -33,9 +38,11 @@ public class AngleListener : MonoBehaviour {
         // vignette.smoothness = Mathf.Abs(Mathf.Sin(Time.realtimeSinceStartup) * 0.99f) + 0.01f;
 
         if (fXRot < 340 && fXRot > 270) {
-            vignette.smoothness = 0.99f;
+            // vignette.smoothness = 0.99f;
+            vignette.smoothness = mapRange(340f, 270f, 0f, 1f, fXRot);
+
         } else {
-            vignette.smoothness = 0.01f;
+            vignette.smoothness = 0f;
         }
 
         Debug.Log(vignette.smoothness);
