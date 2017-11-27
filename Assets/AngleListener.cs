@@ -32,7 +32,7 @@ public class AngleListener : MonoBehaviour {
         fXRot = Camera.main.transform.eulerAngles.x;
 		// Debug.Log(fZRot);
 
-        Debug.Log(fXRot);
+        // Debug.Log(fXRot);
 
         var vignette = m_Profile.vignette.settings;
         // vignette.smoothness = Mathf.Abs(Mathf.Sin(Time.realtimeSinceStartup) * 0.99f) + 0.01f;
