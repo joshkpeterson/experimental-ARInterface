@@ -14,7 +14,7 @@ public class PlaceOnPlane : ARBase
 
     private Vector3 worldCenter;
 
-    public GameObject starPrefab;
+    public GameObject starParentPrefab;
     public GameObject world;
 
     private
@@ -46,19 +46,27 @@ public class PlaceOnPlane : ARBase
     void TriggerStars ()
     {
         Debug.Log("got it");
-        InvokeRepeating("InstantiateStar", 1.0f, 1.0f);
+        InvokeRepeating("InstantiateStar", 1.0f, 3.0f);
     }
 
     void InstantiateStar ()
     {
         //  make two random values here
-        float offsetX = 10 - Random.value * 20;
-        float offsetZ = 10 - Random.value * 20;
+        float offsetX = 0.1f - Random.value * 0.2f;
+        float offsetZ = 0.1f - Random.value * 0.2f;
+        // offsetX = 0;
+        // offsetZ = 0;
         Vector3 offset = new Vector3 (offsetX, 0, offsetZ);
 
-        GameObject star = Instantiate(starPrefab, offset, new Quaternion (0, 0, 0, 0), world.transform);
+        Debug.Log(offset);
 
-        Var animation = star.GetComponent<Animation>();
+
+        // GameObject star = Instantiate(starParentPrefab, world.transform + offset);
+        GameObject star = Instantiate(starParentPrefab, world.transform);
+        star.transform.localPosition = offset;
+
+        Animation animation = star.transform.GetChild(0).GetComponent<Animation>();
+        // Debug.Log(animation);
 
         animation["FallingStar"].wrapMode = WrapMode.Once;
         animation.Play("FallingStar");
