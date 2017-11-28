@@ -5,9 +5,19 @@ using UnityARInterface;
 
 public class PlaceOnPlane : ARBase
 {
+
+    // public InstantiateWorld instantiateWorld;
+
     [SerializeField]
     private Transform m_ObjectToPlace;
     private bool hasPlaced = false;
+
+    private Vector3 worldCenter;
+
+    public GameObject starPrefab;
+    public GameObject world;
+
+    private
 
     void Update ()
     {
@@ -24,9 +34,28 @@ public class PlaceOnPlane : ARBase
             RaycastHit rayHit;
             if (!hasPlaced && Physics.Raycast(ray, out rayHit, float.MaxValue, layerMask))
             {
-                m_ObjectToPlace.transform.position = rayHit.point;
+                worldCenter = rayHit.point;
+                // instantiateWorld(rayHit.point);
+                m_ObjectToPlace.transform.position = worldCenter;
+                TriggerStars();
                 hasPlaced = true;
             }
         }
+    }
+
+    void TriggerStars ()
+    {
+        Debug.Log("got it");
+        InvokeRepeating("InstantiateStar", 1.0f, 1.0f);
+    }
+
+    void InstantiateStar ()
+    {
+        //  make two random values here
+        float offsetX = 10 - Random.value * 20;
+        float offsetZ = 10 - Random.value * 20;
+        Vector3 offset = new Vector3 (offsetX, 0, offsetZ);
+
+        Instantiate(starPrefab, offset, new Quaternion (0, 0, 0, 0), world.transform);
     }
 }
