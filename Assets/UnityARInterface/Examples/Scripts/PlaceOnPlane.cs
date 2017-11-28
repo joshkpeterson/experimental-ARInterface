@@ -56,6 +56,11 @@ public class PlaceOnPlane : ARBase
         float offsetZ = 10 - Random.value * 20;
         Vector3 offset = new Vector3 (offsetX, 0, offsetZ);
 
-        Instantiate(starPrefab, offset, new Quaternion (0, 0, 0, 0), world.transform);
+        GameObject star = Instantiate(starPrefab, offset, new Quaternion (0, 0, 0, 0), world.transform);
+
+        Var animation = star.GetComponent<Animation>();
+
+        animation["FallingStar"].wrapMode = WrapMode.Once;
+        animation.Play("FallingStar");
     }
 }
