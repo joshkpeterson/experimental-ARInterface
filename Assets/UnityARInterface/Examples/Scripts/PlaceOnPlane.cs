@@ -46,7 +46,7 @@ public class PlaceOnPlane : ARBase
     void TriggerStars ()
     {
         Debug.Log("got it");
-        InvokeRepeating("InstantiateStar", 1.0f, 3.0f);
+        InvokeRepeating("InstantiateStar", 1.0f, 1.0f);
     }
 
     void InstantiateStar ()
