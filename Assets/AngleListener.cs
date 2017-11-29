@@ -10,6 +10,10 @@ public class AngleListener : MonoBehaviour {
     private float startTime;
     private float currentTime;
 
+    public GameObject wishPrefab;
+    public List<Wish> wishes = new List<Wish>();
+
+
     PostProcessingProfile m_Profile;
 
     float mapRange(float a1,float a2,float b1,float b2,float s)
@@ -66,6 +70,39 @@ public class AngleListener : MonoBehaviour {
 
                 if (currentTime - startTime > 2.0f) {
                     Debug.Log("Looked up 2 seconds");
+
+                    // if no wishes or if wish is not active
+
+
+                    // Do this in start
+                    // List<string> myList = new List<string>();
+                    //  if list is not empty
+                    if (wishes.Count > 0) {
+                        wish = myList [ myList.Count-1 ];
+                        // Do I need to getcomponent or nah?
+                        if (!wish.GetComponent<WishController>.isActive) {
+                            GameObject wish = Instantiate(wishPrefab, Camera.main.transform.forward + 1);
+                            wishes.Add(wish);
+                        }
+                    }
+
+                    
+
+
+                    // Goes inside WishController:
+
+                    // public Plane leftRightDivider;
+
+                    // public Vector3 leftRightDividerNormal;
+
+                    // leftRightDividerNormal = Vector3.Cross(Camera.main.transform.up, Camera.main.transform.forward);
+                    // leftRightDivider.SetNormalandPosition(leftRightDividerNormal, Camera.main.transform.position);
+
+                    // Later, on update:
+                    // leftRightDivider.GetDistanceToPoint(Vector3 point);
+
+
+
                 }
             }
             else 
