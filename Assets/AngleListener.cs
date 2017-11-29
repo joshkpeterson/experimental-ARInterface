@@ -7,6 +7,8 @@ using UnityEngine.PostProcessing;
 public class AngleListener : MonoBehaviour {
 
     private float fXRot;
+    private float startTime;
+    private float currentTime;
 
     PostProcessingProfile m_Profile;
 
@@ -39,7 +41,10 @@ public class AngleListener : MonoBehaviour {
 
         var color = m_Profile.colorGrading.settings;
 
-        if (fXRot < 360 && fXRot > 270) {
+        if (fXRot < 360 && fXRot > 270)
+        {
+            // Debug.Log(fXRot);
+
             // vignette.smoothness = 0.99f;
             vignette.smoothness = mapRange(360f, 270f, 0f, 1f, fXRot);
             color.channelMixer.red.x = mapRange(360f, 270f, 1f, 2f, fXRot);
@@ -49,8 +54,33 @@ public class AngleListener : MonoBehaviour {
 
 
 
+            // If we look up for longer than 2 seconds, do something
+            if (fXRot < 315)
+            {
+                currentTime = Time.time;
 
-        } else {
+                if (startTime < 0f)
+                {
+                    startTime = currentTime;
+                }
+
+                if (currentTime - startTime > 2.0f) {
+                    Debug.Log("Looked up 2 seconds");
+                }
+            }
+            else 
+            {
+                startTime = -1;
+            }
+
+
+
+
+
+
+        }
+        else
+        {
             vignette.smoothness = 0f;
             // Debug.Log(color.channelMixer.red);
             color.channelMixer.red.x = 1f;

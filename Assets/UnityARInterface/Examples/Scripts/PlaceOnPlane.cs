@@ -24,7 +24,7 @@ public class PlaceOnPlane : ARBase
         if (Input.GetMouseButton(0))
 
         {
-            Debug.Log(hasPlaced);
+            // Debug.Log(hasPlaced);
             var camera = GetCamera();
 
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
